@@ -1,8 +1,18 @@
 <template>
-  <button @click="increment">点击了：{{ count }} 次</button>
+  <!-- <button @click="increment">点击了：{{ count }} 次</button> -->
+  <div>{{ name }}</div>
+  <button @click="changeName">修改仓库中的用户姓名</button>
+  <li>十年后年龄:{{ userStore.afterAge }}</li> //28
 </template>
 <script setup>
 import { ref, reactive, onMounted, computed } from "vue";
+import { useUserStore } from "@/store/user";
+const userStore = useUserStore();
+const name = computed(() => userStore.userInfo.name)
+const changeName = () => {
+  // userStore.userInfo.name = '李四'  // 不要这种代码
+  userStore.changeUserName('李四')
+}
 const count = ref(0)
 const q = ref([5, 5, 1, 9, 9, 6, 4, 5, 8]);
 const testNumber = ref([{ name: "123456" }])
